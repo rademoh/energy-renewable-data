@@ -8,8 +8,8 @@ import java.util.Set;
 /**
  * @author Rabiu Ademoh
  */
-
-@Entity( name = "renewable_energy_project")
+@Entity
+@Table( name = "renewable_energy_project")
 public class RenewableEnergyProjectEntity {
 
     @Id
@@ -22,12 +22,16 @@ public class RenewableEnergyProjectEntity {
     @Column ( unique = true)
     private String projectName;
 
-    @ManyToOne()
-    @JoinColumn(name = "company_id", referencedColumnName = "id", updatable = false , nullable = false)
-    private CompanyEntity companyEntity;
+    private Long companyId;
 
-    @OneToMany(mappedBy="renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    private Set<EnergySourceValueEntity> energySourceValueEntitySet = new HashSet<>();
+
+
+//    @ManyToOne()
+//    @JoinColumn(name = "company_id", referencedColumnName = "id", updatable = false , nullable = false)
+//    private CompanyEntity companyEntity;
+//
+//    @OneToMany(mappedBy="renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+//    private Set<EnergySourceValueEntity> energySourceValueEntitySet = new HashSet<>();
 
     private Double Longitude;
 
@@ -41,18 +45,18 @@ public class RenewableEnergyProjectEntity {
 
     private int batteriesInstalled;
 
-    @OneToMany(cascade = { CascadeType.MERGE} , fetch = FetchType.EAGER)
-    @JoinTable(
-            name="energy_project_public_sector",
-            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "public_sector_id", referencedColumnName = "id")
-    )
-    private Set<PublicSectorEntity> publicSectorEntityList;
+//    @OneToMany(cascade = { CascadeType.MERGE} , fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name="energy_project_public_sector",
+//            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "public_sector_id", referencedColumnName = "id")
+//    )
+//    private Set<PublicSectorEntity> publicSectorEntityList;
 
     private Double debtMix;
 
-    @OneToMany( mappedBy = "renewableEnergyProjectEntity")
-    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
+//    @OneToMany( mappedBy = "renewableEnergyProjectEntity")
+//    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
 
     @Column
     private Date createdAt;
@@ -96,21 +100,21 @@ public class RenewableEnergyProjectEntity {
         this.projectName = projectName;
     }
 
-    public CompanyEntity getCompanyEntity() {
-        return companyEntity;
-    }
-
-    public void setCompanyEntity(CompanyEntity companyEntity) {
-        this.companyEntity = companyEntity;
-    }
-
-    public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
-        return energySourceValueEntitySet;
-    }
-
-    public void setEnergySourceValueEntitySet(Set<EnergySourceValueEntity> energySourceValueEntitySet) {
-        this.energySourceValueEntitySet = energySourceValueEntitySet;
-    }
+//    public CompanyEntity getCompanyEntity() {
+//        return companyEntity;
+//    }
+//
+//    public void setCompanyEntity(CompanyEntity companyEntity) {
+//        this.companyEntity = companyEntity;
+//    }
+//
+//    public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
+//        return energySourceValueEntitySet;
+//    }
+//
+//    public void setEnergySourceValueEntitySet(Set<EnergySourceValueEntity> energySourceValueEntitySet) {
+//        this.energySourceValueEntitySet = energySourceValueEntitySet;
+//    }
 
     public Double getLongitude() {
         return Longitude;
@@ -160,13 +164,13 @@ public class RenewableEnergyProjectEntity {
         this.batteriesInstalled = batteriesInstalled;
     }
 
-    public Set<PublicSectorEntity> getPublicSectorEntityList() {
-        return publicSectorEntityList;
-    }
-
-    public void setPublicSectorEntityList(Set<PublicSectorEntity> publicSectorEntityList) {
-        this.publicSectorEntityList = publicSectorEntityList;
-    }
+//    public Set<PublicSectorEntity> getPublicSectorEntityList() {
+//        return publicSectorEntityList;
+//    }
+//
+//    public void setPublicSectorEntityList(Set<PublicSectorEntity> publicSectorEntityList) {
+//        this.publicSectorEntityList = publicSectorEntityList;
+//    }
 
     public Double getDebtMix() {
         return debtMix;
@@ -193,11 +197,19 @@ public class RenewableEnergyProjectEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
-        return publicInstitutionsConnected;
+//    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
+//        return publicInstitutionsConnected;
+//    }
+//
+//    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
+//        this.publicInstitutionsConnected = publicInstitutionsConnected;
+//    }
+
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
-        this.publicInstitutionsConnected = publicInstitutionsConnected;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 }

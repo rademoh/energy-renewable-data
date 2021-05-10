@@ -9,7 +9,8 @@ import java.util.Set;
  * @author Rabiu Ademoh
  */
 
-@Entity( name = "renewable_energy_source")
+@Entity
+@Table( name = "renewable_energy_source")
 public class RenewableEnergySourceEntity {
 
     @Id
@@ -19,8 +20,8 @@ public class RenewableEnergySourceEntity {
     @Column
     private String name;
 
-    @OneToMany(mappedBy="renewableEnergySourceEntity", cascade = CascadeType.ALL)
-    private Set<EnergySourceValueEntity> energySourceValueEntitySet = new HashSet<>();
+//    @OneToMany(mappedBy="renewableEnergySourceEntity", cascade = CascadeType.ALL)
+//    private Set<EnergySourceValueEntity> energySourceValueEntitySet = new HashSet<>();
 
     @Column
     private Date createdAt;
@@ -45,13 +46,13 @@ public class RenewableEnergySourceEntity {
         this.name = name;
     }
 
-    public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
-        return energySourceValueEntitySet;
-    }
-
-    public void setEnergySourceValueEntitySet(Set<EnergySourceValueEntity> energySourceValueEntitySet) {
-        this.energySourceValueEntitySet = energySourceValueEntitySet;
-    }
+//    public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
+//        return energySourceValueEntitySet;
+//    }
+//
+//    public void setEnergySourceValueEntitySet(Set<EnergySourceValueEntity> energySourceValueEntitySet) {
+//        this.energySourceValueEntitySet = energySourceValueEntitySet;
+//    }
 
     public Date getCreatedAt() {
         return createdAt;

@@ -7,7 +7,8 @@ import java.util.Collection;
 /**
  * @author Rabiu Ademoh
  */
-@Entity( name = "privilege")
+@Entity
+@Table(name = "privilege")
 public class PrivilegeEntity implements Serializable {
 
     @Id

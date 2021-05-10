@@ -17,8 +17,8 @@ public class SecurityConstants {
 
 
     public static String getTokenSecret(){
-        AppProperties appProperties = (AppProperties) SpringApplicationContext.getBean("AppProperties");
-        return appProperties.getTokenSecret();
+       // AppProperties appProperties = (AppProperties) SpringApplicationContext.getBean("AppProperties");
+        return "rab@#14@3cjf9i4gu83nfl0o6yGEHHgde9ddrbL744"; //appProperties.getTokenSecret();
     }
 
 

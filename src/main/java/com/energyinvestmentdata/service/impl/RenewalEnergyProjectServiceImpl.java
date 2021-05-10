@@ -8,10 +8,7 @@ import com.energyinvestmentdata.exceptions.NotFoundException;
 import com.energyinvestmentdata.exceptions.ProjectNameAlreadyExistsException;
 import com.energyinvestmentdata.model.response.EnergyProjectRes;
 import com.energyinvestmentdata.model.response.EnergySourceValueRes;
-import com.energyinvestmentdata.repository.CompanyRepository;
-import com.energyinvestmentdata.repository.EnergySourceValueRepository;
-import com.energyinvestmentdata.repository.RenewableEnergySourceRepository;
-import com.energyinvestmentdata.repository.RenewalEnergyProjectRepository;
+import com.energyinvestmentdata.repository.*;
 import com.energyinvestmentdata.service.RenewalEnergyProjectService;
 import com.energyinvestmentdata.shared.Utils;
 import com.energyinvestmentdata.shared.dto.EnergySourceValueDto;
@@ -36,6 +33,12 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectService {
+
+    @Autowired
+    CustomRepository customRepository;
+    
+    @Autowired
+    BaseRepository repository;
 
     @Autowired
     ModelMapper modelMapper;
@@ -70,7 +73,7 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
 
            RenewableEnergyProjectEntity renewableEnergyProjectEntity = modelMapper.map(renewalEnergyProjectDto, RenewableEnergyProjectEntity.class);
            renewableEnergyProjectEntity.setProjectId(projectId);
-           renewableEnergyProjectEntity.setCompanyEntity(companyEntity.get());
+           //renewableEnergyProjectEntity.setCompanyEntity(companyEntity.get());
 
 
           Set<EnergySourceValueEntity> energySourceValueEntities = new HashSet<>();
@@ -81,14 +84,14 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
 
                EnergySourceValueEntity energySourceValueEntity = new EnergySourceValueEntity();
 
-               energySourceValueEntity.setRenewableEnergySourceEntity(energySourceEntity.get());
+               //energySourceValueEntity.setRenewableEnergySourceEntity(energySourceEntity.get());
                energySourceValueEntity.setPercentage(renewalEnergyProjectDto.getEnergySourceValueDto().get(i).getPercentage());
-               energySourceValueEntity.setRenewableEnergyProjectEntity(renewableEnergyProjectEntity);
+              // energySourceValueEntity.setRenewableEnergyProjectEntity(renewableEnergyProjectEntity);
 
                energySourceValueEntities.add(energySourceValueEntity);
            }
           // renewableEnergyProjectEntity.getEnergySourceValueEntitySet().addAll(energySourceValueEntities);
-           renewableEnergyProjectEntity.setEnergySourceValueEntitySet(energySourceValueEntities);
+           //renewableEnergyProjectEntity.setEnergySourceValueEntitySet(energySourceValueEntities);
 
 
 
@@ -96,29 +99,44 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
 
           RenewalEnergyProjectDto energyProjectDto = modelMapper.map(createdProject, RenewalEnergyProjectDto.class);
 
-          List<EnergySourceValueDto> energySourceValueDto = modelMapper.map(createdProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueDto>>() {}.getType());
+          //List<EnergySourceValueDto> energySourceValueDto = modelMapper.map(createdProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueDto>>() {}.getType());
 
-          log.info(" energySourceValueDto - {}", new Gson().toJson(energySourceValueDto));
+          //log.info(" energySourceValueDto - {}", new Gson().toJson(energySourceValueDto));
 
-          energyProjectDto.setEnergySourceValueDto(energySourceValueDto);
+          //energyProjectDto.setEnergySourceValueDto(energySourceValueDto);
 
         return energyProjectDto;
     }
 
     @Override
+//    public EnergyProjectRes getProjectByProjectId(Long id) {
+//
+//          Optional<RenewableEnergyProjectEntity> projectEntity = renewalEnergyProjectRepository.findById(id);
+//
+//          Set<EnergySourceValueEntity> energySourceValueEntities =   projectEntity.get().getEnergySourceValueEntitySet();
+//          List<EnergySourceValueRes> res = energySourceValueEntities.stream().map( i -> new EnergySourceValueRes(i.getPercentage(),i.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
+//
+//          EnergyProjectRes renewalEnergyProjectDto = modelMapper.map(projectEntity.get(), EnergyProjectRes.class);
+//          // List<EnergySourceValueDto> energySourceValueDto = modelMapper.map(projectEntity.get().getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueDto>>() {}.getType());
+//        renewalEnergyProjectDto.setEnergySourceValueDto(res);
+//        renewalEnergyProjectDto.setCompanyName(projectEntity.get().getCompanyEntity().getName());
+//
+//        return renewalEnergyProjectDto;
+//    }
+
     public EnergyProjectRes getProjectByProjectId(Long id) {
-
-          Optional<RenewableEnergyProjectEntity> projectEntity = renewalEnergyProjectRepository.findById(id);
-
-          Set<EnergySourceValueEntity> energySourceValueEntities =   projectEntity.get().getEnergySourceValueEntitySet();
-          List<EnergySourceValueRes> res = energySourceValueEntities.stream().map( i -> new EnergySourceValueRes(i.getPercentage(),i.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
-
-          EnergyProjectRes renewalEnergyProjectDto = modelMapper.map(projectEntity.get(), EnergyProjectRes.class);
-          // List<EnergySourceValueDto> energySourceValueDto = modelMapper.map(projectEntity.get().getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueDto>>() {}.getType());
-        renewalEnergyProjectDto.setEnergySourceValueDto(res);
-        renewalEnergyProjectDto.setCompanyName(projectEntity.get().getCompanyEntity().getName());
-
-        return renewalEnergyProjectDto;
+        RenewableEnergyProjectEntity energyProject = repository.findOneOptional(RenewableEnergyProjectEntity.class, id).orElseThrow(
+                () -> new NotFoundException("Records not found")
+        );
+        List<EnergySourceValueEntity> energySource = repository.findAllBy(EnergySourceValueEntity.class, "energyProjectId",energyProject.getId());
+        CompanyEntity company = repository.findOne(CompanyEntity.class, energyProject.getCompanyId());
+        EnergyProjectRes projectRes = modelMapper.map(energyProject, EnergyProjectRes.class);
+        List<EnergySourceValueRes> collect = energySource.stream().map(i ->
+                EnergySourceValueRes.builder().percentage(i.getPercentage()).build())
+                .collect(Collectors.toList());
+        projectRes.setEnergySourceValueDto(collect);
+        projectRes.setCompanyName(company.getName());
+        return  projectRes;
     }
 
 

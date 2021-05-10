@@ -1,19 +1,25 @@
 package com.energyinvestmentdata.model.response;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @author Rabiu Ademoh
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnergySourceValueRes {
 
     private Integer percentage;
 
     private String name;
 
-    public EnergySourceValueRes(Integer percentage, String name) {
-        this.percentage = percentage;
-        this.name = name;
-    }
+
 
     public Integer getPercentage() {
         return percentage;

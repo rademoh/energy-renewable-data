@@ -7,7 +7,8 @@ import java.util.Date;
  * @author Rabiu Ademoh
  */
 
-@Entity( name = "public_sector")
+@Entity
+@Table( name = "public_sector")
 public class PublicSectorEntity {
 
     @Id

@@ -7,7 +7,8 @@ import java.util.*;
  * @author Rabiu Ademoh
  */
 
-@Entity( name = "company")
+@Entity
+@Table( name = "company")
 public class CompanyEntity {
 
     @Id
@@ -17,11 +18,11 @@ public class CompanyEntity {
     @Column
     private String name;
 
-    @OneToMany( mappedBy = "companyEntity")
-    private Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities  = new HashSet<>();
-
-    @OneToMany( mappedBy = "companyEntity")
-    private Set<UserEntity> userEntity  = new HashSet<>();
+//    @OneToMany( mappedBy = "companyEntity")
+//    private Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities  = new HashSet<>();
+//
+//    @OneToMany( mappedBy = "companyEntity")
+//    private Set<UserEntity> userEntity  = new HashSet<>();
 
     @Column
     private Date createdAt;
@@ -61,19 +62,19 @@ public class CompanyEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public Set<RenewableEnergyProjectEntity> getRenewableEnergyProjectEntities() {
-        return renewableEnergyProjectEntities;
-    }
-
-    public void setRenewableEnergyProjectEntities(Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities) {
-        this.renewableEnergyProjectEntities = renewableEnergyProjectEntities;
-    }
-
-    public Set<UserEntity> getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(Set<UserEntity> userEntity) {
-        this.userEntity = userEntity;
-    }
+//    public Set<RenewableEnergyProjectEntity> getRenewableEnergyProjectEntities() {
+//        return renewableEnergyProjectEntities;
+//    }
+//
+//    public void setRenewableEnergyProjectEntities(Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities) {
+//        this.renewableEnergyProjectEntities = renewableEnergyProjectEntities;
+//    }
+//
+//    public Set<UserEntity> getUserEntity() {
+//        return userEntity;
+//    }
+//
+//    public void setUserEntity(Set<UserEntity> userEntity) {
+//        this.userEntity = userEntity;
+//    }
 }

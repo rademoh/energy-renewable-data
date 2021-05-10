@@ -7,7 +7,8 @@ import java.util.Date;
  * @author Rabiu Ademoh
  */
 
-@Entity( name = "public_institution")
+@Entity
+@Table( name = "public_institution")
 public class PublicInstitutionsEntity {
 
     @Id
@@ -17,8 +18,8 @@ public class PublicInstitutionsEntity {
     @Column
     private String name;
 
-    @ManyToOne
-    private RenewableEnergyProjectEntity renewableEnergyProjectEntity;
+//    @ManyToOne
+//    private RenewableEnergyProjectEntity renewableEnergyProjectEntity;
 
     @Column
     private Date createdAt;

@@ -7,7 +7,8 @@ import java.io.Serializable;
  * @author Rabiu Ademoh
  */
 
-@Entity(  name = "public_institutions_connected")
+@Entity
+@Table(  name = "public_institutions_connected")
 public class PublicInstitutionsConnected  implements Serializable {
 
     @Id
@@ -17,13 +18,13 @@ public class PublicInstitutionsConnected  implements Serializable {
     @Column( name = "institutions_connected")
     private Integer institutionsConnected;
 
-    @ManyToOne
-    @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
-    RenewableEnergyProjectEntity renewableEnergyProjectEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "public_institution_id" , referencedColumnName = "id")
-    PublicInstitutionsEntity publicInstitutionsEntity;
+//    @ManyToOne
+//    @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
+//    RenewableEnergyProjectEntity renewableEnergyProjectEntity;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "public_institution_id" , referencedColumnName = "id")
+//    PublicInstitutionsEntity publicInstitutionsEntity;
 
 
     public Long getId() {
@@ -42,19 +43,19 @@ public class PublicInstitutionsConnected  implements Serializable {
         this.institutionsConnected = institutionsConnected;
     }
 
-    public RenewableEnergyProjectEntity getRenewableEnergyProjectEntity() {
-        return renewableEnergyProjectEntity;
-    }
-
-    public void setRenewableEnergyProjectEntity(RenewableEnergyProjectEntity renewableEnergyProjectEntity) {
-        this.renewableEnergyProjectEntity = renewableEnergyProjectEntity;
-    }
-
-    public PublicInstitutionsEntity getPublicInstitutionsEntity() {
-        return publicInstitutionsEntity;
-    }
-
-    public void setPublicInstitutionsEntity(PublicInstitutionsEntity publicInstitutionsEntity) {
-        this.publicInstitutionsEntity = publicInstitutionsEntity;
-    }
+//    public RenewableEnergyProjectEntity getRenewableEnergyProjectEntity() {
+//        return renewableEnergyProjectEntity;
+//    }
+//
+//    public void setRenewableEnergyProjectEntity(RenewableEnergyProjectEntity renewableEnergyProjectEntity) {
+//        this.renewableEnergyProjectEntity = renewableEnergyProjectEntity;
+//    }
+//
+//    public PublicInstitutionsEntity getPublicInstitutionsEntity() {
+//        return publicInstitutionsEntity;
+//    }
+//
+//    public void setPublicInstitutionsEntity(PublicInstitutionsEntity publicInstitutionsEntity) {
+//        this.publicInstitutionsEntity = publicInstitutionsEntity;
+//    }
 }

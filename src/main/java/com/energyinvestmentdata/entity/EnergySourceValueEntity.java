@@ -1,5 +1,7 @@
 package com.energyinvestmentdata.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,8 +9,8 @@ import java.util.Objects;
 /**
  * @author Rabiu Ademoh
  */
-
-@Entity( name = "energy_source_value")
+@Entity
+@Table( name = "energy_source_value")
 public class EnergySourceValueEntity implements Serializable {
 
     @Id
@@ -18,14 +20,19 @@ public class EnergySourceValueEntity implements Serializable {
     @Column
     private Integer percentage;
 
+    @Column
+    private Long energySourceId;
 
-    @ManyToOne(cascade = CascadeType.ALL )
-    @JoinColumn(name = "energy_source_id" , referencedColumnName = "id")
-    RenewableEnergySourceEntity renewableEnergySourceEntity;
+    @Column
+    private Long energyProjectId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
-    RenewableEnergyProjectEntity renewableEnergyProjectEntity;
+//    @ManyToOne(cascade = CascadeType.ALL )
+//    @JoinColumn(name = "energy_source_id" , referencedColumnName = "id")
+//    RenewableEnergySourceEntity renewableEnergySourceEntity;
+//
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
+//    RenewableEnergyProjectEntity renewableEnergyProjectEntity;
 
     public Long getId() {
         return id;
@@ -43,20 +50,36 @@ public class EnergySourceValueEntity implements Serializable {
         this.percentage = percentage;
     }
 
-    public RenewableEnergySourceEntity getRenewableEnergySourceEntity() {
-        return renewableEnergySourceEntity;
+//    public RenewableEnergySourceEntity getRenewableEnergySourceEntity() {
+//        return renewableEnergySourceEntity;
+//    }
+//
+//    public void setRenewableEnergySourceEntity(RenewableEnergySourceEntity renewableEnergySourceEntity) {
+//        this.renewableEnergySourceEntity = renewableEnergySourceEntity;
+//    }
+//
+//    public RenewableEnergyProjectEntity getRenewableEnergyProjectEntity() {
+//        return renewableEnergyProjectEntity;
+//    }
+//
+//    public void setRenewableEnergyProjectEntity(RenewableEnergyProjectEntity renewableEnergyProjectEntity) {
+//        this.renewableEnergyProjectEntity = renewableEnergyProjectEntity;
+//    }
+
+    public Long getEnergySourceId() {
+        return energySourceId;
     }
 
-    public void setRenewableEnergySourceEntity(RenewableEnergySourceEntity renewableEnergySourceEntity) {
-        this.renewableEnergySourceEntity = renewableEnergySourceEntity;
+    public void setEnergySourceId(Long energySourceId) {
+        this.energySourceId = energySourceId;
     }
 
-    public RenewableEnergyProjectEntity getRenewableEnergyProjectEntity() {
-        return renewableEnergyProjectEntity;
+    public Long getEnergyProjectId() {
+        return energyProjectId;
     }
 
-    public void setRenewableEnergyProjectEntity(RenewableEnergyProjectEntity renewableEnergyProjectEntity) {
-        this.renewableEnergyProjectEntity = renewableEnergyProjectEntity;
+    public void setEnergyProjectId(Long energyProjectId) {
+        this.energyProjectId = energyProjectId;
     }
 
     /*@Override

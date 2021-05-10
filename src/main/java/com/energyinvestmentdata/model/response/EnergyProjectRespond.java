@@ -2,11 +2,8 @@ package com.energyinvestmentdata.model.response;
 
 import com.energyinvestmentdata.entity.PublicInstitutionsConnected;
 import com.energyinvestmentdata.entity.PublicSectorEntity;
-import com.energyinvestmentdata.shared.dto.EnergySourceValueDto;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,11 +15,7 @@ import java.util.Set;
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class EnergyProjectRes implements Serializable {
-
-
+public class EnergyProjectRespond implements Serializable {
 
     private String projectName;
 
