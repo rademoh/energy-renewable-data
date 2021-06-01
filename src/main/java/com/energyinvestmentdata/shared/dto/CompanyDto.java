@@ -23,7 +23,7 @@ public class CompanyDto {
 
     private String name;
 
-    private Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities  = new HashSet<>();
+  //  private Set<RenewableEnergyProjectEntity> renewableEnergyProjectEntities  = new HashSet<>();
 
-    private Set<UserEntity> userEntity  = new HashSet<>();
+   // private Set<UserEntity> userEntity  = new HashSet<>();
 }

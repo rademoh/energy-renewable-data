@@ -59,18 +59,5 @@ public class EnergySourceValueEntity implements Serializable {
         this.renewableEnergyProjectEntity = renewableEnergyProjectEntity;
     }
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EnergySourceValueEntity that = (EnergySourceValueEntity) o;
 
-        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (getId() != null ?  getId().hashCode() : 0);
-    }*/
 }

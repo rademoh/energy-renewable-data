@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 @Entity(  name = "public_institutions_connected")
-public class PublicInstitutionsConnected  implements Serializable {
+public class PublicInstitutionsConnectedEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -17,11 +17,11 @@ public class PublicInstitutionsConnected  implements Serializable {
     @Column( name = "institutions_connected")
     private Integer institutionsConnected;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL )
     @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
     RenewableEnergyProjectEntity renewableEnergyProjectEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "public_institution_id" , referencedColumnName = "id")
     PublicInstitutionsEntity publicInstitutionsEntity;
 

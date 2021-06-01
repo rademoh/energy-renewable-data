@@ -1,8 +1,11 @@
 package com.energyinvestmentdata.entity;
 
+import org.hibernate.annotations.Immutable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +26,7 @@ public class RenewableEnergyProjectEntity {
     private String projectName;
 
     @ManyToOne()
-    @JoinColumn(name = "company_id", referencedColumnName = "id", updatable = false , nullable = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "id" , nullable = false)
     private CompanyEntity companyEntity;
 
     @OneToMany(mappedBy="renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
@@ -41,18 +44,18 @@ public class RenewableEnergyProjectEntity {
 
     private int batteriesInstalled;
 
-    @OneToMany(cascade = { CascadeType.MERGE} , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.MERGE} , fetch = FetchType.EAGER)
     @JoinTable(
             name="energy_project_public_sector",
-            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "energy_project_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "public_sector_id", referencedColumnName = "id")
     )
     private Set<PublicSectorEntity> publicSectorEntityList;
 
     private Double debtMix;
 
-    @OneToMany( mappedBy = "renewableEnergyProjectEntity")
-    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
+    @OneToMany( mappedBy = "renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private Set<PublicInstitutionsConnectedEntity> publicInstitutionsConnected = new HashSet<>();
 
     @Column
     private Date createdAt;
@@ -193,11 +196,11 @@ public class RenewableEnergyProjectEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
+    public Set<PublicInstitutionsConnectedEntity> getPublicInstitutionsConnected() {
         return publicInstitutionsConnected;
     }
 
-    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
+    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnectedEntity> publicInstitutionsConnected) {
         this.publicInstitutionsConnected = publicInstitutionsConnected;
     }
 }

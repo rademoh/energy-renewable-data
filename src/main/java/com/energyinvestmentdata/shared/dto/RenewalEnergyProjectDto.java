@@ -1,9 +1,9 @@
 package com.energyinvestmentdata.shared.dto;
 
-import com.energyinvestmentdata.entity.CompanyEntity;
-import com.energyinvestmentdata.entity.EnergySourceValueEntity;
-import com.energyinvestmentdata.entity.PublicInstitutionsConnected;
-import com.energyinvestmentdata.entity.PublicSectorEntity;
+import com.energyinvestmentdata.entity.PublicInstitutionsConnectedEntity;
+import com.energyinvestmentdata.model.request.PublicInstitutionConnectedRes;
+import com.energyinvestmentdata.model.response.EnergySourceValueRes;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class RenewalEnergyProjectDto implements Serializable {
 
     private Long companyId;
 
-    private List<EnergySourceValueDto> energySourceValueDto = new ArrayList<>();
+    private List<EnergySourceValueRes> energySource = new ArrayList<>();
 
     private Double Longitude;
 
@@ -34,11 +34,11 @@ public class RenewalEnergyProjectDto implements Serializable {
 
     private int batteriesInstalled;
 
-    private Set<PublicSectorEntity> publicSectorEntityList;
+    private List<Integer> publicSector;
 
     private Double debtMix;
 
-    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
+    private List<PublicInstitutionConnectedRes> publicInstitutionConnected;
 
 
     public String getProjectName() {
@@ -57,12 +57,12 @@ public class RenewalEnergyProjectDto implements Serializable {
         this.companyId = companyId;
     }
 
-    public List<EnergySourceValueDto> getEnergySourceValueDto() {
-        return energySourceValueDto;
+    public List<EnergySourceValueRes> getEnergySource() {
+        return energySource;
     }
 
-    public void setEnergySourceValueDto(List<EnergySourceValueDto> energySourceValueDto) {
-        this.energySourceValueDto = energySourceValueDto;
+    public void setEnergySource(List<EnergySourceValueRes> energySource) {
+        this.energySource = energySource;
     }
 
     public Double getLongitude() {
@@ -113,12 +113,12 @@ public class RenewalEnergyProjectDto implements Serializable {
         this.batteriesInstalled = batteriesInstalled;
     }
 
-    public Set<PublicSectorEntity> getPublicSectorEntityList() {
-        return publicSectorEntityList;
+    public List<Integer> getPublicSector() {
+        return publicSector;
     }
 
-    public void setPublicSectorEntityList(Set<PublicSectorEntity> publicSectorEntityList) {
-        this.publicSectorEntityList = publicSectorEntityList;
+    public void setPublicSector(List<Integer> publicSector) {
+        this.publicSector = publicSector;
     }
 
     public Double getDebtMix() {
@@ -129,13 +129,11 @@ public class RenewalEnergyProjectDto implements Serializable {
         this.debtMix = debtMix;
     }
 
-    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
-        return publicInstitutionsConnected;
+    public List<PublicInstitutionConnectedRes> getPublicInstitutionConnected() {
+        return publicInstitutionConnected;
     }
 
-    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
-        this.publicInstitutionsConnected = publicInstitutionsConnected;
+    public void setPublicInstitutionConnected(List<PublicInstitutionConnectedRes> publicInstitutionConnected) {
+        this.publicInstitutionConnected = publicInstitutionConnected;
     }
-
-
 }

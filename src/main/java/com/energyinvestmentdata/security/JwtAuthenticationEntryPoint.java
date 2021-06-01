@@ -2,6 +2,7 @@ package com.energyinvestmentdata.security;
 
 import com.energyinvestmentdata.model.response.ApiResponse;
 import com.google.gson.Gson;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -23,12 +24,13 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException e) throws IOException, ServletException {
 
         //httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        final String expired = (String) httpServletRequest.getAttribute("error");
         httpServletResponse.setContentType("application/json");
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage(e.getMessage());
         apiResponse.setStatus(401);
         apiResponse.setData("");
-        apiResponse.setError(e.getLocalizedMessage());
+        apiResponse.setError(expired);
         String jsonLoginResponse = new Gson().toJson(apiResponse);
         httpServletResponse.getWriter().print(jsonLoginResponse);
 

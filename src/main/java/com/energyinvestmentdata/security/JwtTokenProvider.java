@@ -1,9 +1,11 @@
 package com.energyinvestmentdata.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,16 +44,19 @@ public class JwtTokenProvider {
     }
 
     //Validate the token
-    public boolean validateToken(String token){
+    public boolean validateToken(String token, HttpServletRequest httpServletRequest){
         try{
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
             return true;
         }catch (SignatureException ex){
             System.out.println("Invalid JWT Signature");
+            httpServletRequest.setAttribute("error","Invalid JWT Signature");
         }catch (MalformedJwtException ex){
             System.out.println("Invalid JWT Token");
+            httpServletRequest.setAttribute("error","Invalid JWT Token");
         }catch (ExpiredJwtException ex){
             System.out.println("Expired JWT token");
+            httpServletRequest.setAttribute("error","Expired JWT Token");
         }catch (UnsupportedJwtException ex){
             System.out.println("Unsupported JWT token");
         }catch (IllegalArgumentException ex){

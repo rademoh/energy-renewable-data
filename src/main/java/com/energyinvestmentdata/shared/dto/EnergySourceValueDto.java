@@ -9,8 +9,6 @@ public class EnergySourceValueDto {
 
     private Long id;
 
-    private Long energySourceId;
-
     private Integer percentage;
 
     private RenewalEnergyProjectDto renewalEnergyProjectDto;
@@ -23,14 +21,6 @@ public class EnergySourceValueDto {
 
     public void setRenewalEnergySourceDto(RenewalEnergySourceDto renewalEnergySourceDto) {
         this.renewalEnergySourceDto = renewalEnergySourceDto;
-    }
-
-    public Long getEnergySourceId() {
-        return energySourceId;
-    }
-
-    public void setEnergySourceId(Long energySourceId) {
-        this.energySourceId = energySourceId;
     }
 
     public Integer getPercentage() {

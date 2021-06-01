@@ -18,13 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -36,7 +34,7 @@ import static com.energyinvestmentdata.security.SecurityConstants.TOKEN_PREFIX;
 /**
  * @author Rabiu Ademoh
  */
-
+//@CrossOrigin(origins = "http://localhost:8011")
 @RestController
 @RequestMapping("api/v1/users/")
 public class UserController {
@@ -64,7 +62,6 @@ public class UserController {
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponse<UserDto>> registerUser(@Valid @RequestBody UserDetailsRequestModel userDetails){
 
-         modelMapper = new ModelMapper();
         UserDto userDto = modelMapper.map(userDetails, UserDto.class);
         userDto.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
 
@@ -91,7 +88,7 @@ public class UserController {
         UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();
 
         if( !userDetails.isEnabled()){
-            throw new BadRequestException("You have been disabled. Kindly contact the administrator");
+            throw new BadCredentialsException("You have been disabled.");
         }
 
         Optional<UserEntity> userEntity = userRepository.findByUserId(userDetails.getUserId());

@@ -2,6 +2,7 @@ package com.energyinvestmentdata.security;
 
 import com.energyinvestmentdata.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             String jwt = getJWTFromRequest(httpServletRequest);
 
-            if(StringUtils.hasText(jwt)&& tokenProvider.validateToken(jwt)){
+            if(StringUtils.hasText(jwt)&& tokenProvider.validateToken(jwt,httpServletRequest)){
                 String userId = tokenProvider.getUserIdFromJWT(jwt);
                 UserPrincipal userDetails = customUserDetailsService.loadUserByUserId(userId);
 
@@ -48,10 +49,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            }else {
+                throw new BadCredentialsException("Invalid token or token expired");
             }
 
         }catch (Exception ex){
-            logger.error("Could not set user authentication in security context", ex);
+
+          logger.error("Could not set user authentication in security context", ex);
         }
 
 

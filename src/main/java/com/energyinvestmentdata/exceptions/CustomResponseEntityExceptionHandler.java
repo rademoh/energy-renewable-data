@@ -4,6 +4,7 @@ import com.energyinvestmentdata.model.response.ApiResponse;
 import com.energyinvestmentdata.model.response.ErrorModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -117,4 +118,15 @@ public class CustomResponseEntityExceptionHandler {
         return ApiResponse.builder().data("").status(HttpStatus.NOT_FOUND.value())
                 .message("The requested record not found!").error(ex.getMessage()).build();
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ApiResponse<?> handleBadCredentialException(BadCredentialsException e) {
+
+        return ApiResponse.builder().data("").status(HttpStatus.UNAUTHORIZED.value()).message(e.getLocalizedMessage()).error(e.getMessage()).build();
+    }
+
+
+
 }

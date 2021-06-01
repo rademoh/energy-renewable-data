@@ -1,8 +1,7 @@
 package com.energyinvestmentdata.model.response;
 
-import com.energyinvestmentdata.entity.PublicInstitutionsConnected;
+import com.energyinvestmentdata.entity.PublicInstitutionsConnectedEntity;
 import com.energyinvestmentdata.entity.PublicSectorEntity;
-import com.energyinvestmentdata.shared.dto.EnergySourceValueDto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,12 +14,13 @@ import java.util.Set;
 public class EnergyProjectRes implements Serializable {
 
 
+    private Long id;
 
     private String projectName;
 
     private String companyName;
 
-    private List<EnergySourceValueRes> energySourceValueDto = new ArrayList<>();
+    private List<EnergySourceValueRes> energySource = new ArrayList<>();
 
     private Double Longitude;
 
@@ -34,12 +34,27 @@ public class EnergyProjectRes implements Serializable {
 
     private int batteriesInstalled;
 
-    private Set<PublicSectorEntity> publicSectorEntityList;
+    private List<PublicSectorRes> publicSector;
 
     private Double debtMix;
 
-    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
+    private List<PublicInstitutionsConnectedRes> publicInstitutionsConnected;
 
+    public EnergyProjectRes(Long id, String projectName, String companyName, List<EnergySourceValueRes> energySource, Double longitude, Double latitude, Double installedCapacity, int connections_financial_close, int co2_avoided, int batteriesInstalled, List<PublicSectorRes> publicSector, Double debtMix, List<PublicInstitutionsConnectedRes> publicInstitutionsConnected) {
+        this.id = id;
+        this.projectName = projectName;
+        this.companyName = companyName;
+        this.energySource = energySource;
+        Longitude = longitude;
+        this.latitude = latitude;
+        this.installedCapacity = installedCapacity;
+        this.connections_financial_close = connections_financial_close;
+        this.co2_avoided = co2_avoided;
+        this.batteriesInstalled = batteriesInstalled;
+        this.publicSector = publicSector;
+        this.debtMix = debtMix;
+        this.publicInstitutionsConnected = publicInstitutionsConnected;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -57,12 +72,12 @@ public class EnergyProjectRes implements Serializable {
         this.companyName = companyName;
     }
 
-    public List<EnergySourceValueRes> getEnergySourceValueDto() {
-        return energySourceValueDto;
+    public List<EnergySourceValueRes> getEnergySource() {
+        return energySource;
     }
 
-    public void setEnergySourceValueDto(List<EnergySourceValueRes> energySourceValueDto) {
-        this.energySourceValueDto = energySourceValueDto;
+    public void setEnergySource(List<EnergySourceValueRes> energySource) {
+        this.energySource = energySource;
     }
 
     public Double getLongitude() {
@@ -113,12 +128,12 @@ public class EnergyProjectRes implements Serializable {
         this.batteriesInstalled = batteriesInstalled;
     }
 
-    public Set<PublicSectorEntity> getPublicSectorEntityList() {
-        return publicSectorEntityList;
+    public List<PublicSectorRes> getPublicSector() {
+        return publicSector;
     }
 
-    public void setPublicSectorEntityList(Set<PublicSectorEntity> publicSectorEntityList) {
-        this.publicSectorEntityList = publicSectorEntityList;
+    public void setPublicSector(List<PublicSectorRes> publicSector) {
+        this.publicSector = publicSector;
     }
 
     public Double getDebtMix() {
@@ -129,13 +144,19 @@ public class EnergyProjectRes implements Serializable {
         this.debtMix = debtMix;
     }
 
-    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
+    public List<PublicInstitutionsConnectedRes> getPublicInstitutionsConnected() {
         return publicInstitutionsConnected;
     }
 
-    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
+    public void setPublicInstitutionsConnected(List<PublicInstitutionsConnectedRes> publicInstitutionsConnected) {
         this.publicInstitutionsConnected = publicInstitutionsConnected;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

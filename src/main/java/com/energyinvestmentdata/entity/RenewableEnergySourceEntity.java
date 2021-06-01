@@ -28,6 +28,16 @@ public class RenewableEnergySourceEntity {
     @Column
     private Date modifiedAt;
 
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.modifiedAt = new Date();
+    }
+
 
     public Long getId() {
         return id;

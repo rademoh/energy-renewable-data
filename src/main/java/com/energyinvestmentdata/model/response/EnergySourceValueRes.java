@@ -6,6 +6,8 @@ package com.energyinvestmentdata.model.response;
  */
 public class EnergySourceValueRes {
 
+    private Long id;
+
     private Integer percentage;
 
     private String name;
@@ -29,5 +31,13 @@ public class EnergySourceValueRes {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

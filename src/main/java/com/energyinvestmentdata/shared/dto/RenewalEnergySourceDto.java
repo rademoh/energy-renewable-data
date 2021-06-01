@@ -13,7 +13,7 @@ public class RenewalEnergySourceDto {
 
     private String name;
 
-    private Set<EnergySourceValueEntity> energySourceValueEntitySet;
+   // private Set<EnergySourceValueEntity> energySourceValueEntitySet;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class RenewalEnergySourceDto {
         this.name = name;
     }
 
-    public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
+    /*public Set<EnergySourceValueEntity> getEnergySourceValueEntitySet() {
         return energySourceValueEntitySet;
     }
 
     public void setEnergySourceValueEntitySet(Set<EnergySourceValueEntity> energySourceValueEntitySet) {
         this.energySourceValueEntitySet = energySourceValueEntitySet;
-    }
+    }*/
 }

@@ -1,5 +1,8 @@
 package com.energyinvestmentdata.entity;
 
+
+import org.hibernate.annotations.Immutable;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -33,6 +36,15 @@ public class CompanyEntity {
         return id;
     }
 
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.modifiedAt = new Date();
+    }
     public void setId(Long id) {
         this.id = id;
     }

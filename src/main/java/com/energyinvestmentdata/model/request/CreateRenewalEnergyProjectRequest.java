@@ -1,13 +1,10 @@
 package com.energyinvestmentdata.model.request;
 
-import com.energyinvestmentdata.entity.CompanyEntity;
-import com.energyinvestmentdata.entity.EnergySourceValueEntity;
-import com.energyinvestmentdata.entity.PublicInstitutionsConnected;
-import com.energyinvestmentdata.entity.PublicSectorEntity;
+import com.energyinvestmentdata.entity.PublicInstitutionsConnectedEntity;
+import com.energyinvestmentdata.model.response.EnergySourceValueRes;
 import com.energyinvestmentdata.shared.dto.EnergySourceValueDto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +19,7 @@ public class CreateRenewalEnergyProjectRequest {
 
     private Long companyId;
 
-    private List<EnergySourceValueDto> energySourceValueDto;
+    private List<EnergySourceValueRes> energySource;
 
    //@NotNull(message = "Longitude name is required")
     private Double longitude;
@@ -42,12 +39,20 @@ public class CreateRenewalEnergyProjectRequest {
    // @NotNull(message = "Batteries Installed is required")
     private int batteriesInstalled;
 
-    private Set<PublicSectorEntity> publicSectorEntityList;
+    private Set<Integer> publicSector;
 
     private Double debtMix;
 
-    private Set<PublicInstitutionsConnected> publicInstitutionsConnected;
+    private Set<PublicInstitutionConnectedRes> publicInstitutionConnected;
 
+
+    public Set<Integer> getPublicSector() {
+        return publicSector;
+    }
+
+    public void setPublicSector(Set<Integer> publicSector) {
+        this.publicSector = publicSector;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -65,12 +70,12 @@ public class CreateRenewalEnergyProjectRequest {
         this.companyId = companyId;
     }
 
-    public List<EnergySourceValueDto> getEnergySourceValueDto() {
-        return energySourceValueDto;
+    public List<EnergySourceValueRes> getEnergySource() {
+        return energySource;
     }
 
-    public void setEnergySourceValueDto(List<EnergySourceValueDto> energySourceValueDto) {
-        this.energySourceValueDto = energySourceValueDto;
+    public void setEnergySource(List<EnergySourceValueRes> energySource) {
+        this.energySource = energySource;
     }
 
     public Double getLongitude() {
@@ -121,13 +126,6 @@ public class CreateRenewalEnergyProjectRequest {
         this.batteriesInstalled = batteriesInstalled;
     }
 
-    public Set<PublicSectorEntity> getPublicSectorEntityList() {
-        return publicSectorEntityList;
-    }
-
-    public void setPublicSectorEntityList(Set<PublicSectorEntity> publicSectorEntityList) {
-        this.publicSectorEntityList = publicSectorEntityList;
-    }
 
     public Double getDebtMix() {
         return debtMix;
@@ -137,15 +135,15 @@ public class CreateRenewalEnergyProjectRequest {
         this.debtMix = debtMix;
     }
 
-    public Set<PublicInstitutionsConnected> getPublicInstitutionsConnected() {
-        return publicInstitutionsConnected;
+    public Set<PublicInstitutionConnectedRes> getPublicInstitutionConnected() {
+        return publicInstitutionConnected;
     }
 
-    public void setPublicInstitutionsConnected(Set<PublicInstitutionsConnected> publicInstitutionsConnected) {
-        this.publicInstitutionsConnected = publicInstitutionsConnected;
+    public void setPublicInstitutionConnected(Set<PublicInstitutionConnectedRes> publicInstitutionConnected) {
+        this.publicInstitutionConnected = publicInstitutionConnected;
     }
 
-   // 1. Entry point custome exception
+ // 1. Entry point custome exception
     // 2. roles and privileges exception customs
 
 
