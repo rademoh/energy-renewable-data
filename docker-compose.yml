@@ -3,7 +3,7 @@ services:
   energy-investment-data:
     image: energy-investment-data
     ports:
-      - "8045:8080"
+      - "8045:8011"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/renewable_energy?allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: "root"
