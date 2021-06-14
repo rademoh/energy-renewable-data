@@ -44,7 +44,7 @@ public class RenewableEnergyProjectEntity {
 
     private int batteriesInstalled;
 
-    @ManyToMany(cascade = { CascadeType.MERGE} , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.MERGE}  , fetch = FetchType.EAGER  )
     @JoinTable(
             name="energy_project_public_sector",
             joinColumns = @JoinColumn(name = "energy_project_id", referencedColumnName = "id"),
@@ -54,7 +54,7 @@ public class RenewableEnergyProjectEntity {
 
     private Double debtMix;
 
-    @OneToMany( mappedBy = "renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "renewableEnergyProjectEntity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER )
     private Set<PublicInstitutionsConnectedEntity> publicInstitutionsConnected = new HashSet<>();
 
     @Column

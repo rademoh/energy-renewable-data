@@ -5,6 +5,7 @@ import com.energyinvestmentdata.model.response.EnergySourceValueRes;
 import com.energyinvestmentdata.shared.dto.EnergySourceValueDto;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class CreateRenewalEnergyProjectRequest {
 
     private Long companyId;
 
-    private List<EnergySourceValueRes> energySource;
+    private List<EnergySourceValueRes> energySource  = new ArrayList<>();
 
    //@NotNull(message = "Longitude name is required")
     private Double longitude;

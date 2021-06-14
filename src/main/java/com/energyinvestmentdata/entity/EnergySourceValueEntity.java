@@ -19,11 +19,13 @@ public class EnergySourceValueEntity implements Serializable {
     private Integer percentage;
 
 
-    @ManyToOne(cascade = CascadeType.ALL )
+    //@ManyToOne(cascade = CascadeType.ALL )
+    @ManyToOne()
     @JoinColumn(name = "energy_source_id" , referencedColumnName = "id")
     RenewableEnergySourceEntity renewableEnergySourceEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+   // @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
     RenewableEnergyProjectEntity renewableEnergyProjectEntity;
 

@@ -22,7 +22,7 @@ public class RenewalEnergyProjectDto implements Serializable {
 
     private List<EnergySourceValueRes> energySource = new ArrayList<>();
 
-    private Double Longitude;
+    private Double longitude;
 
     private Double latitude;
 
@@ -66,11 +66,11 @@ public class RenewalEnergyProjectDto implements Serializable {
     }
 
     public Double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(Double longitude) {
-        Longitude = longitude;
+        this.longitude = longitude;
     }
 
     public Double getLatitude() {

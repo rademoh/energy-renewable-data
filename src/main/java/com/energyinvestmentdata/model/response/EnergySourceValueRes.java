@@ -12,7 +12,8 @@ public class EnergySourceValueRes {
 
     private String name;
 
-    public EnergySourceValueRes(Integer percentage, String name) {
+    public EnergySourceValueRes(Long id, Integer percentage, String name) {
+        this.id = id;
         this.percentage = percentage;
         this.name = name;
     }

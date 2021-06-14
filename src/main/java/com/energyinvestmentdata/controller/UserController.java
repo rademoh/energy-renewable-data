@@ -76,6 +76,23 @@ public class UserController {
 
     }
 
+    @PostMapping( path = "admin",consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiResponse<UserDto>> registerUserAdmin(@Valid @RequestBody UserDetailsRequestModel userDetails){
+
+        UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+        userDto.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMIN")));
+
+        UserDto createdUser = userService.createUser(userDto);
+
+        ApiResponse<UserDto> response = ApiResponse.<UserDto>builder()
+                .message(ResponseMessage.SUCCESSFULLY_CREATED)
+                .status(HttpStatus.OK.value()).data(createdUser).error("").build();
+
+        return ResponseEntity.ok().body(response);
+
+
+    }
+
     @PostMapping( path = "/login" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponse<UserDto>> authenticateUser(@Valid @RequestBody LoginRequest loginRequest){
 

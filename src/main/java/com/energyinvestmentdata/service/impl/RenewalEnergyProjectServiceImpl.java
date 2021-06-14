@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -123,8 +124,12 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
           RenewableEnergyProjectEntity createdProject = renewalEnergyProjectRepository.save(renewableEnergyProjectEntity);
 
           RenewalEnergyProjectDto energyProjectDto = modelMapper.map(createdProject, RenewalEnergyProjectDto.class);
-          List<EnergySourceValueRes> energySourceValueRes = modelMapper.map(createdProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueRes>>() {}.getType());
-          energyProjectDto.setEnergySource(energySourceValueRes);
+
+           createdProject.getEnergySourceValueEntitySet().forEach(it -> System.out.println(it.getPercentage() +" "+it.getId()));
+
+
+         // List<EnergySourceValueRes> energySourceValueRes = modelMapper.map(createdProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueRes>>() {}.getType());
+         // energyProjectDto.setEnergySource(energySourceValueRes);
 
         return energyProjectDto;
     }
@@ -135,7 +140,7 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
           Optional<RenewableEnergyProjectEntity> projectEntity = renewalEnergyProjectRepository.findById(id);
           RenewableEnergyProjectEntity fetchedProject = projectEntity.orElseThrow(() -> new NotFoundException("Project does not exist"));
 
-          List<EnergySourceValueRes> energySourceValueResList = fetchedProject.getEnergySourceValueEntitySet().stream().map( esv -> new EnergySourceValueRes(esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
+          List<EnergySourceValueRes> energySourceValueResList = fetchedProject.getEnergySourceValueEntitySet().stream().map( esv -> new EnergySourceValueRes(esv.getId(),esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
 
           List<PublicInstitutionsConnectedRes> publicInstitutionsConnectedResList = fetchedProject.getPublicInstitutionsConnected().stream().map( pic -> new PublicInstitutionsConnectedRes(pic.getInstitutionsConnected(),pic.getPublicInstitutionsEntity().getName())).collect(Collectors.toList());
 
@@ -158,7 +163,7 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
         List<EnergyProjectRes> list =   response.getContent().stream().map(
                 item ->
                 {
-                    List<EnergySourceValueRes> energySourceValueResList = item.getEnergySourceValueEntitySet().stream().map(esv -> new EnergySourceValueRes(esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
+                    List<EnergySourceValueRes> energySourceValueResList = item.getEnergySourceValueEntitySet().stream().map(esv -> new EnergySourceValueRes(esv.getId(),esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
                     List<PublicInstitutionsConnectedRes> publicInstitutionsConnectedResList = item.getPublicInstitutionsConnected().stream().map(pic -> new PublicInstitutionsConnectedRes(pic.getInstitutionsConnected(),pic.getPublicInstitutionsEntity().getName())).collect(Collectors.toList());
                     List<PublicSectorRes> publicSectorResList   =  item.getPublicSectorEntityList().stream().map( ps -> new PublicSectorRes(ps.getId(),ps.getName())).collect(Collectors.toList());
                     return new EnergyProjectRes(item.getId(), item.getProjectName(), item.getCompanyEntity().getName(), energySourceValueResList, item.getLongitude(), item.getLatitude(), item.getInstalledCapacity(), item.getConnections_financial_close()
@@ -172,7 +177,15 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
     public void delete(Long id) {
         Optional<RenewableEnergyProjectEntity> renewableEnergyProjectEntity = renewalEnergyProjectRepository.findById(id);
         renewableEnergyProjectEntity.orElseThrow(() -> new NotFoundException("Project does not exist"));
-        renewalEnergyProjectRepository.delete(renewableEnergyProjectEntity.get());
+        renewalEnergyProjectRepository.deleteById(renewableEnergyProjectEntity.get().getId());
+
+   /*     Hibernate: delete from energy_project_public_sector where energy_project_id=?
+        Hibernate: delete from energy_source_value where id=?
+        Hibernate: delete from energy_source_value where id=?
+        Hibernate: delete from public_institutions_connected where id=?
+        Hibernate: delete from public_institutions_connected where id=?
+        Hibernate: delete from renewable_energy_project where id=?*/
+
     }
 
     @Override
@@ -250,8 +263,8 @@ public class RenewalEnergyProjectServiceImpl implements RenewalEnergyProjectServ
         RenewableEnergyProjectEntity updatedProject = renewalEnergyProjectRepository.save(fetchedProject);
 
         RenewalEnergyProjectDto energyProjectDto = modelMapper.map(updatedProject, RenewalEnergyProjectDto.class);
-        List<EnergySourceValueRes> energySourceValueRes = modelMapper.map(updatedProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueRes>>() {}.getType());
-        energyProjectDto.setEnergySource(energySourceValueRes);
+        //List<EnergySourceValueRes> energySourceValueRes = modelMapper.map(updatedProject.getEnergySourceValueEntitySet(),new TypeToken<List<EnergySourceValueRes>>() {}.getType());
+        //energyProjectDto.setEnergySource(energySourceValueRes);
 
 
         return energyProjectDto;

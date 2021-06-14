@@ -102,7 +102,7 @@ public class RenewalEnergyProjectController {
 
         list = result.stream().map( item ->
                 {
-            List<EnergySourceValueRes> energySourceValueResList = item.getEnergySourceValueEntitySet().stream().map(esv -> new EnergySourceValueRes(esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
+            List<EnergySourceValueRes> energySourceValueResList = item.getEnergySourceValueEntitySet().stream().map(esv -> new EnergySourceValueRes(esv.getId(),esv.getPercentage(),esv.getRenewableEnergySourceEntity().getName())).collect( Collectors.toList());
             List<PublicInstitutionsConnectedRes> publicInstitutionsConnectedResList = item.getPublicInstitutionsConnected().stream().map(pic -> new PublicInstitutionsConnectedRes(pic.getInstitutionsConnected(),pic.getPublicInstitutionsEntity().getName())).collect(Collectors.toList());
             List<PublicSectorRes> publicSectorResList   =  item.getPublicSectorEntityList().stream().map( ps -> new PublicSectorRes(ps.getId(),ps.getName())).collect(Collectors.toList());
                     return new EnergyProjectRes(item.getId(), item.getProjectName(), item.getCompanyEntity().getName(), energySourceValueResList, item.getLongitude(), item.getLatitude(), item.getInstalledCapacity(), item.getConnections_financial_close()

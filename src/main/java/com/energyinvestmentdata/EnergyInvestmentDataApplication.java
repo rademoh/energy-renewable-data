@@ -29,6 +29,7 @@ public class EnergyInvestmentDataApplication {
     @Bean
     public Docket swaggerConfiguration(){
         return new Docket(DocumentationType.SWAGGER_2)
+                 .host("3.65.109.190")
                 .select()
                 .paths(PathSelectors.ant("/api/v1/**"))
                 .apis(RequestHandlerSelectors.basePackage("com.energyinvestmentdata"))
@@ -41,9 +42,9 @@ public class EnergyInvestmentDataApplication {
         return new ApiInfo(
                 "Energy Saving Data API",
                 "",
-                "1.0",
+                "1.1",
                 "",
-                new Contact("Rabiu Ademoh","www.notready.com","rademoh@yahoo.com"),
+                new Contact("Rabiu Ademoh","http://www.notready.com","rademoh@yahoo.com"),
                 "",
                 "",
                 Collections.emptyList());

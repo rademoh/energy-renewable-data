@@ -17,11 +17,13 @@ public class PublicInstitutionsConnectedEntity implements Serializable {
     @Column( name = "institutions_connected")
     private Integer institutionsConnected;
 
-    @ManyToOne(cascade = CascadeType.ALL )
+    //@ManyToOne(cascade = CascadeType.ALL )
+    @ManyToOne()
     @JoinColumn(name = "energy_project_id" , referencedColumnName = "id")
     RenewableEnergyProjectEntity renewableEnergyProjectEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "public_institution_id" , referencedColumnName = "id")
     PublicInstitutionsEntity publicInstitutionsEntity;
 

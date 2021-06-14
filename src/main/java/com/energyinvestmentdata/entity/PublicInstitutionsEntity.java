@@ -21,7 +21,8 @@ public class PublicInstitutionsEntity {
     @Column
     private String name;
 
-    @OneToMany( mappedBy = "publicInstitutionsEntity", cascade = CascadeType.ALL)
+    //@OneToMany( mappedBy = "publicInstitutionsEntity", cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "publicInstitutionsEntity")
     private Set<PublicInstitutionsConnectedEntity> publicInstitutionsConnectedEntitySet = new HashSet<>();
 
     @Column

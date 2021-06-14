@@ -19,7 +19,8 @@ public class RenewableEnergySourceEntity {
     @Column
     private String name;
 
-    @OneToMany(mappedBy="renewableEnergySourceEntity", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy="renewableEnergySourceEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="renewableEnergySourceEntity")
     private Set<EnergySourceValueEntity> energySourceValueEntitySet = new HashSet<>();
 
     @Column

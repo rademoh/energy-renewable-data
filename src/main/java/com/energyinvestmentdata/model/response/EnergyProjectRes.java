@@ -22,7 +22,7 @@ public class EnergyProjectRes implements Serializable {
 
     private List<EnergySourceValueRes> energySource = new ArrayList<>();
 
-    private Double Longitude;
+    private Double longitude;
 
     private Double latitude;
 
@@ -40,12 +40,16 @@ public class EnergyProjectRes implements Serializable {
 
     private List<PublicInstitutionsConnectedRes> publicInstitutionsConnected;
 
+
+    public EnergyProjectRes() {
+    }
+
     public EnergyProjectRes(Long id, String projectName, String companyName, List<EnergySourceValueRes> energySource, Double longitude, Double latitude, Double installedCapacity, int connections_financial_close, int co2_avoided, int batteriesInstalled, List<PublicSectorRes> publicSector, Double debtMix, List<PublicInstitutionsConnectedRes> publicInstitutionsConnected) {
         this.id = id;
         this.projectName = projectName;
         this.companyName = companyName;
         this.energySource = energySource;
-        Longitude = longitude;
+        this.longitude = longitude;
         this.latitude = latitude;
         this.installedCapacity = installedCapacity;
         this.connections_financial_close = connections_financial_close;
@@ -80,12 +84,13 @@ public class EnergyProjectRes implements Serializable {
         this.energySource = energySource;
     }
 
+
     public Double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(Double longitude) {
-        Longitude = longitude;
+        this.longitude = longitude;
     }
 
     public Double getLatitude() {
